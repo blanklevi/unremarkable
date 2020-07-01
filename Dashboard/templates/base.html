@@ -33,6 +33,7 @@
       </div>
 
       <!-- Modal stuff -->
+      {% if sign_in_button %}
       <button 
         style="margin-right: 8px;"
         type="button" 
@@ -53,7 +54,7 @@
             </div>
             <div class="modal-body">
               <div class="form-group">
-                <form action="/login_submit" method="POST">
+                <form action="/users/login_submit" method="POST">
                   {% csrf_token %}
                     <label for="log_email">Email Address</label>
                     <input type="email" class="form-control" name="log_email" />
@@ -63,12 +64,23 @@
                   <button type="submit" class="btn btn-dark">Login</button>
                 </form>
                 <br>
-                <a href="users/register" class="btn btn-secondary" role="button">No Account? Register</a>
+                <a href="/users/register" class="btn btn-secondary" role="button">No Account? Register</a>
               </div>
             </div>
           </div>
         </div>
       </div>
+      {% endif %}
+
+      <!-- Logged User -->
+      {% if logged_user %}
+          <span class="navbar-brand mx-auto">{{ logged_user }}</span>
+          {% endif %}
+
+      <!-- Logout Button -->
+      {% if logged_user %}
+      <a style="margin-right: 8px;" href="/users/logout" class="btn btn-outline-light" role="button">Logout</a>
+      {% endif %}
 
       <!-- Search Box -->
       <form class="form-inline">

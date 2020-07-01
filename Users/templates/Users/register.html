@@ -11,7 +11,7 @@
   {% endfor %}
 </ul>
 {% endif %}
-<form action="/register_submit" method="POST">
+<form action="/users/register_submit" method="POST">
   {% csrf_token %}
   <div class="form-group">
     <label for="first_name">First Name</label>
