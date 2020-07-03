@@ -21,6 +21,7 @@ from django.conf.urls.static import static
 from Dashboard import views
 
 urlpatterns = [
+    #Add the Admin functionality
     path('admin/', admin.site.urls),
 
     # These two paths are from a tut i used to learn the carousel pictures
@@ -29,5 +30,8 @@ urlpatterns = [
 
     # Add the Users app to the project
     path('users/', include('Users.urls')),
+
+    #Add the Shop app to the project
+    path('shop/', include('Shop.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

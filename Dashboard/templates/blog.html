@@ -4,10 +4,10 @@
   src="{% static 'img/UnRemarkableLogo.png' %}"
   alt="UnRemarkableLogo"
 />
-<div class="row row-cols-1 row-cols-md-2">
+<div class="row">
   {% for post in posts %}
-  <div class="col mb-4">
-    <div class="card">
+  <div class="col-md-4 d-flex">
+    <div class="card text-white bg-dark mb-3 flex-fill">
       <div class="view overlay">
         <img class="card-img-top" src="{{post.image.url}}" alt="" />
         <a href="#!">
@@ -17,7 +17,9 @@
       <div class="card-body">
         <h4 class="card-title">{{post.title}}</h4>
         <p class="card-text">{{post.created_at}}</p>
-        <a href="{% url 'detail' post.id %}" class="btn btn-dark btn-md"
+        <a
+          href="{% url 'detail' post.id %}"
+          class="btn btn-outline-light btn-md"
           >Read more</a
         >
       </div>
@@ -25,4 +27,30 @@
   </div>
   {% endfor %}
 </div>
+<!-- Pagination -->
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    {% if posts.has_previous %}
+    <li class="page-item">
+      <a
+        class="page-link"
+        href="/?page={{posts.previous_page_number}}"
+        tabindex="-1"
+        >Previous</a
+      >
+    </li>
+    {% endif %} {% for num in posts.paginator.page_range %}
+    <li class="page-item">
+      <a class="page-link" href="/?page={{num}}">{{ num }}</a>
+    </li>
+    {% endfor %} {% if posts.has_next %}
+    <li class="page-item">
+      <a class="page-link" href="/?page={{posts.next_page_number}}">Next</a>
+    </li>
+    {% endif %}
+  </ul>
+</nav>
+<!-- <div class="pagination">
+  {% for num in posts.paginator.page_range %} {{ num }} {% endfor %}
+</div> -->
 {% endblock %}

@@ -1,7 +1,12 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} {% block content %} {% load static %}
+<img
+  class="img-fluid"
+  src="{% static 'img/UnRemarkableLogo.png' %}"
+  alt="UnRemarkableLogo"
+/>
 <div
   id="carousel-example-1z"
-  class="carousel slide carousel-fade"
+  class="carousel slide carousel-fade d-flex justify-content-center"
   data-ride="carousel"
 >
   <ol class="carousel-indicators">
@@ -17,7 +22,11 @@
     ></li>
     {% endfor %}
   </ol>
-  <div class="carousel-inner" role="listbox">
+  <div
+    class="carousel-inner"
+    style="width: 900px; height: 600px !important;"
+    role="listbox"
+  >
     <div class="carousel-item active">
       <img class="d-block w-100" src="{{post.image.url}}" alt="First slide" />
     </div>
