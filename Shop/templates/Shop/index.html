@@ -1,7 +1,29 @@
-{% extends 'base.html' %} {% block content %} {% load static %}
+{% extends 'Shop/base.html' %} {% block content %} {% load static %}
+<!-- NotRemarkable Logo -->
 <img
   class="img-fluid"
-  src="{% static 'img/UnRemarkableLogo.png' %}"
-  alt="UnRemarkableLogo"
+  src="{% static 'img/NotRemarkable.png' %}"
+  alt="NotRemarkable Logo"
+  style="margin-top: 25px; margin-bottom: 25px;"
 />
+
+<!-- Body -->
+<div class="row">
+  {% for product in products %}
+  <div style="margin-bottom: 40px;" class="col-lg-4">
+    <img class="thumbnail" src="{{product.imageURL}}" alt="" />
+    <div class="box-element product">
+      <h6><strong>{{ product.name }}</strong></h6>
+      <hr />
+      <button class="btn btn-outline-secondary add-btn">
+        Add to Cart
+      </button>
+      <a class="btn btn-outline-success" href="#">View Details</a>
+      <h4 style="display: inline-block; float: right;">
+        ${{ product.price|floatformat:2 }}
+      </h4>
+    </div>
+  </div>
+  {% endfor %}
+</div>
 {% endblock %}

@@ -22,14 +22,22 @@ def blog_view(request):
     page = request.GET.get('page')
     posts = paginator.get_page(page)
 
+    # User
+    # user = User.objects.filter(email=logged_user)
+    # print(user)
+    # user_fn = user.first_name
+    # request.session['first_name'] = user_fn
+    # first_name = request.session['first_name']
+
     context = {
         'posts': posts,
         'logged_user': logged_user,
+        # 'first_name': first_name,
         'sign_in_button': sign_in_button,
         'myFilter': myFilter,
         'all_posts': myFilter.qs,
     }
-    return render(request, 'blog.html', context)
+    return render(request, 'Dashboard/blog.html', context)
 
 def detail_view(request, id):
     post = get_object_or_404(Post, id=id)
@@ -38,5 +46,5 @@ def detail_view(request, id):
         'post': post,
         'photos': photos,
     }
-    return render(request, 'detail.html', context)
+    return render(request, 'Dashboard/detail.html', context)
 

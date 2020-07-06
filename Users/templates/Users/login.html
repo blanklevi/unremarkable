@@ -1,4 +1,10 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'Dashboard/base.html' %} {% block content %} {% load static %}
+<img
+  class="img-fluid"
+  src="{% static 'img/NotRemarkable.png' %}"
+  alt="NotRemarkable Logo"
+  style="margin-top: 25px; margin-bottom: 25px;"
+/>
 <h1>Login</h1>
 {% if messages %}
 <ul class="messages">
@@ -19,7 +25,7 @@
     <label for="log_pw">Password</label>
     <input type="password" class="form-control" name="log_pw" />
   </div>
-  <button type="submit" class="btn btn-primary">Login</button>
+  <button type="submit" class="btn btn-dark">Login</button>
 </form>
-<a href="/register">Don't have an account? Click here to register!</a>
+<a href="/users/register">Don't have an account? Click here to register!</a>
 {% endblock %}

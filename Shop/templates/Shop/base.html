@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NotRemarkable</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/style.css' %}"
+    />
+    <!-- <link href="style_reg.css" rel="stylesheet" /> -->
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="/">Home</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="/shop">Shop</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Modal stuff -->
+      {% if sign_in_button %}
+      <button 
+        style="margin-right: 8px;"
+        type="button" 
+        class="btn btn-outline-light" 
+        data-toggle="modal" 
+        data-target="#exampleModal">
+        Sign In
+      </button>
+      
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Sign In</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <form action="/users/login_submit" method="POST">
+                  {% csrf_token %}
+                    <label for="log_email">Email Address</label>
+                    <input type="email" class="form-control" name="log_email" />
+                    <label for="log_pw">Password</label>
+                    <input type="password" class="form-control" name="log_pw" />
+                    <br>
+                  <button type="submit" class="btn btn-dark">Login</button>
+                </form>
+                <br>
+                <a href="/users/register" class="btn btn-secondary" role="button">No Account? Register</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- Logged User -->
+      {% if logged_user %}
+          <span class="navbar-brand mx-auto">{{ logged_user }}</span>
+          {% endif %}
+
+      <!-- Logout Button -->
+      {% if logged_user %}
+      <a style="margin-left: 15px;" href="/users/logout" class="btn btn-outline-light" role="button">Logout</a>
+      {% endif %}
+
+      <!-- Search Box -->
+      <!-- <form method="GET">
+        <div class="form-control">
+          {{ myFilter.form }}
+          <button class="btn btn-dark my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div> -->
+
+      <!-- Cart Button -->
+      <div class="form-inline my-2 my-lg-0">
+        <a href="{% url 'cart' %}">
+            <img style="width: 25px; display: inline-block; margin-left: 15px;" id="cart-icon" src="{% static 'img/cart.png' %}">
+        </a>
+        <p style="color: white;" id="cart-total">0</p>
+      </div>
+
+    </nav>
+    </div>
+    
+
+    <!-- Container -->
+    <div class="container">
+      {% block content %} {% endblock %} 
+
+      <!-- Scripts for BootStrap -->
+      <script
+        src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"
+      ></script>
+      <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"
+      ></script>
+      <script
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"
+      ></script>
+    </div>
+
+    <!-- Footer -->
+    <footer id="sticky-footer" class="py-4 bg-dark text-white-50">
+      <div class="container text-center">
+        <small style="color: white;">Copyright 2020 &copy; Stephen Blank/NotRemarkable</small>
+      </div>
+    </footer>
+
+  </body>
+</html>
