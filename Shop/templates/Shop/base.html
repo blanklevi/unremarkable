@@ -95,7 +95,7 @@
         <a href="{% url 'cart' %}">
             <img style="width: 25px; display: inline-block; margin-left: 15px;" id="cart-icon" src="{% static 'img/cart.png' %}">
         </a>
-        <p style="color: white;" id="cart-total">0</p>
+        <p style="color: white;" id="cart-total">{{ cartItems }}</p>
       </div>
 
     </nav>
@@ -131,5 +131,28 @@
       </div>
     </footer>
 
+    <!-- Script for Cart.js -->
+    <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
+
+    <!-- Script for User Auth & CSRF token -->
+    <script type="text/javascript">
+      let user = '{{ logged_user }}'
+
+      function getToken(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+          var cookies = document.cookie.split(';');
+          for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')){
+              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+              break;
+            }
+          }
+        }
+        return cookieValue;
+      }
+      var csrftoken = getToken('csrftoken');
+    </script>
   </body>
 </html>

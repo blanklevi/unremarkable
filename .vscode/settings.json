@@ -1,3 +1,4 @@
 {
-    "python.pythonPath": "C:\\users\\levi\\documents\\dojo\\python_stack\\my_environments\\djangoPy3Env\\Scripts\\python.exe"
+    "python.pythonPath": "C:\\users\\levi\\documents\\dojo\\python_stack\\my_environments\\djangoPy3Env\\Scripts\\python.exe",
+    "python.formatting.provider": "autopep8"
 }
