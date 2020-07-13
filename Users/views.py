@@ -3,18 +3,31 @@ from Users.models import User
 from Dashboard.models import Post, PostImage
 from django.contrib import messages
 import bcrypt
+from Users.forms import UserRegisterForm
 
 
 def index(request):
-    request.session['log_email'] = []
-    request.session['log_password'] = []
-    request.session['log_first_name'] = []
-    request.session['log_last_name'] = []
+    # request.session['log_email'] = []
+    # request.session['log_password'] = []
+    # request.session['log_first_name'] = []
+    # request.session['log_last_name'] = []
     return redirect("/")
 
 
-def register_page(request):
-    return render(request, "Users/register.html")
+def register(request):
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            messages.success(request, f'Account created for {username}! You are now able to log in!')
+            return redirect('login')
+    else: 
+        form = UserRegisterForm()
+    context = {
+        'form': form,
+    }
+    return render(request, "Users/register.html", context)
 
 def login_page(request):
     return render(request, "Users/login.html")
@@ -35,35 +48,35 @@ def log_in(request):
                 return redirect("/")
 
 
-def register(request):
-    errors = User.objects.reg_validator(request.POST)
-    if len(errors) > 0:
-        for key, value in errors.items():
-            messages.error(request, value)
-        return redirect('/users/register')
-    else:
-        if request.method == "POST":
-            first_name = request.POST['first_name']
-            last_name = request.POST['last_name']
-            email = request.POST['email']
-            pw = request.POST['password']
-            confirm_pw = request.POST['confirm_pw']
-            pw_hash = bcrypt.hashpw(pw.encode(), bcrypt.gensalt()).decode()
-            # confirm password stuff here
-            if bcrypt.checkpw(confirm_pw.encode(), pw_hash.encode()) == True:
-                User.objects.create(first_name=first_name, last_name=last_name,
-                                    email=email, password=pw_hash)
-                request.session['log_email'] = email
-                request.session['log_password'] = pw_hash
-                request.session['log_first_name'] = first_name
-                request.session['log_last_name'] = last_name
-            else:
-                errors['pwconfirm'] = "Passwords did not match!"
-                if len(errors) > 0:
-                    for key, value in errors.items():
-                        messages.error(request, value)
-                    return redirect('/register')
-    return redirect('/')
+# def register(request):
+#     errors = User.objects.reg_validator(request.POST)
+#     if len(errors) > 0:
+#         for key, value in errors.items():
+#             messages.error(request, value)
+#         return redirect('/users/register')
+#     else:
+#         if request.method == "POST":
+#             first_name = request.POST['first_name']
+#             last_name = request.POST['last_name']
+#             email = request.POST['email']
+#             pw = request.POST['password']
+#             confirm_pw = request.POST['confirm_pw']
+#             pw_hash = bcrypt.hashpw(pw.encode(), bcrypt.gensalt()).decode()
+#             # confirm password stuff here
+#             if bcrypt.checkpw(confirm_pw.encode(), pw_hash.encode()) == True:
+#                 User.objects.create(first_name=first_name, last_name=last_name,
+#                                     email=email, password=pw_hash)
+#                 request.session['log_email'] = email
+#                 request.session['log_password'] = pw_hash
+#                 request.session['log_first_name'] = first_name
+#                 request.session['log_last_name'] = last_name
+#             else:
+#                 errors['pwconfirm'] = "Passwords did not match!"
+#                 if len(errors) > 0:
+#                     for key, value in errors.items():
+#                         messages.error(request, value)
+#                     return redirect('/register')
+#     return redirect('/')
 
 
 def successful_log_in(request):

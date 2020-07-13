@@ -1,4 +1,7 @@
-{% extends 'Dashboard/base.html' %} {% block content %} {% load static %}
+{% extends 'Dashboard/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% load static %}
 <img
   class="img-fluid"
   src="{% static 'img/NotRemarkable.png' %}"
@@ -15,17 +18,12 @@
   {% endfor %}
 </ul>
 {% endif %}
-<form action="/users/login_submit" method="POST">
+<form method="POST">
   {% csrf_token %}
-  <div class="form-group">
-    <label for="log_email">Email Address</label>
-    <input type="email" class="form-control" name="log_email" />
-  </div>
-  <div class="form-group">
-    <label for="log_pw">Password</label>
-    <input type="password" class="form-control" name="log_pw" />
-  </div>
-  <button type="submit" class="btn btn-dark">Login</button>
+  <fieldset class="form-group">
+    <legend class="border-bottom mb-4">{{ form|crispy }}</legend>
+  </fieldset>
+  <button type="submit" class="btn btn-dark">Login!</button>
 </form>
-<a href="/users/register">Don't have an account? Click here to register!</a>
+<a href="{% url 'register' %}">Need an account? Click here to Register!</a>
 {% endblock %}

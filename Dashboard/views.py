@@ -6,12 +6,12 @@ from .models import Post, PostImage
 def blog_view(request):
     posts = Post.objects.all().order_by('-created_at')
     postz = Post.objects.all()
-    if request.session['log_email'] == []:
-        logged_user = []
-        sign_in_button = ["Levi is the best"]
-    else:
-        logged_user = request.session['log_email']
-        sign_in_button = []  
+    # if  request.session['log_email'] != []:
+    #     logged_user = request.session['log_email']
+    #     sign_in_button = []
+    # else:
+    #     # logged_user = []
+    #     sign_in_button = ["Levi is the best"] 
     
     # Search Bar
     myFilter = PostFilter(request.GET, queryset=posts)
@@ -31,9 +31,9 @@ def blog_view(request):
 
     context = {
         'posts': posts,
-        'logged_user': logged_user,
+        # 'logged_user': logged_user,
         # 'first_name': first_name,
-        'sign_in_button': sign_in_button,
+        # 'sign_in_button': sign_in_button,
         'myFilter': myFilter,
         'all_posts': myFilter.qs,
     }
