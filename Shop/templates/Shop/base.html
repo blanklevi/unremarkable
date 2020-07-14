@@ -72,15 +72,15 @@
       </div>
       {% endif %}
 
-      <!-- Logged User -->
+      <!-- Logged User
       {% if logged_user %}
           <span class="navbar-brand mx-auto">{{ logged_user }}</span>
           {% endif %}
 
-      <!-- Logout Button -->
+      Logout Button
       {% if logged_user %}
       <a style="margin-left: 15px;" href="/users/logout" class="btn btn-outline-light" role="button">Logout</a>
-      {% endif %}
+      {% endif %} -->
 
       <!-- Search Box -->
       <!-- <form method="GET">
@@ -89,6 +89,19 @@
           <button class="btn btn-dark my-2 my-sm-0" type="submit">Search</button>
         </form>
       </div> -->
+
+       <!-- Logged User -->
+      {% if user.is_authenticated %}
+        <span class="navbar-brand mx-auto">{{ user.username }}</span>
+      {% endif %}
+
+      <!-- Logout Button -->
+      {% if user.is_authenticated %}
+        <a style="margin-left: 15px; margin-right: 15px;" href="{% url 'logout' %}" class="btn btn-outline-light" role="button">Logout</a>
+      {% else %}
+        <a style="margin-left: 15px; margin-right: 15px;" href="{% url 'login' %}" class="btn btn-outline-light" role="button">Login</a>
+        <a style="margin-right: 15px;" href="{% url 'register' %}" class="btn btn-outline-light" role="button">Register</a>
+      {% endif %}
 
       <!-- Cart Button -->
       <div class="form-inline my-2 my-lg-0">
@@ -136,7 +149,7 @@
 
     <!-- Script for User Auth & CSRF token -->
     <script type="text/javascript">
-      let user = '{{ logged_user }}'
+      let user = '{{ request.user }}'
 
       function getToken(name) {
         var cookieValue = null;

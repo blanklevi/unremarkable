@@ -120,18 +120,35 @@
 
 <!-- Script: Hiding Shipping Info if digital purchase -->
 <script type="text/javascript">
-  var shipping = "{{ order.shipping }}";
-  var total = "{{ order.get_cart_total }}";
+  let shipping = "{{ order.shipping }}";
+  let total = "{{ order.get_cart_total }}";
+  user = '{{ request.user }}'
+
+  function getToken(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+          var cookies = document.cookie.split(';');
+          for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')){
+              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+              break;
+            }
+          }
+        }
+        return cookieValue;
+      }
+      var csrftoken = getToken('csrftoken');
 
   if (shipping == "False") {
     document.getElementById("shipping-info").innerHTML = "";
   }
 
   // Show/Hide info on the checkout page depending on User Auth
-  if ("{{ logged_user }}" != []) {
+  if (user != 'AnonymousUser') {
     document.getElementById("user-info").innerHTML = "";
   }
-  if (shipping == "False" && "{{ logged_user }}" != []) {
+  if (shipping == "False" && user != 'AnonymousUser') {
     document.getElementById("form-wrapper").classList.add("hidden");
     document.getElementById("payment-info").classList.remove("hidden");
   }
@@ -170,7 +187,7 @@
       shippingInfo.state = form.state.value;
       shippingInfo.zipcode = form.zipcode.value;
     }
-    if ("{{ logged_user }}" == []) {
+    if (user == 'AnonymousUser') {
       userFormData.name = form.name.value;
       userFormData.email = form.email.value;
     }

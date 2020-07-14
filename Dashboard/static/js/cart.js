@@ -7,7 +7,7 @@ for (let i = 0; i < updateBtns.length; i++) {
     console.log("productId: ", productId, "Action: ", action);
 
     console.log("User: ", user);
-    if (user === []) {
+    if (user === 'AnonymousUser') {
       console.log("Not logged in");
     } else {
       updateUserOrder(productId, action);
