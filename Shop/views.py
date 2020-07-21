@@ -115,7 +115,10 @@ def category_view(request, id):
     cartItems = data['cartItems']
 
     category = Category.objects.get(id=id)
+    products = Product.objects.filter(category=category)
     context = {
         'category': category,
+        'products': products,
+        'cartItems': cartItems,
     }
     return render(request, 'Shop/category.html', context)

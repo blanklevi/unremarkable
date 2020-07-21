@@ -28,6 +28,9 @@ urlpatterns = [
     path('', views.blog_view, name='blog'),
     path('<int:id>/', views.detail_view, name='detail'),
 
+    # About Page
+    path('about', views.about_page, name="about"),
+
     # Add the Users app to the project
     path('users/', include('Users.urls')),
 

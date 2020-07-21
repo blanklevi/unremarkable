@@ -8,12 +8,27 @@
 />
 
 <!-- Body -->
-<div class="row">
+<table style="background-color: black; margin-bottom: 30px;" class="table table-responsive-sm table-dark">
+  <thead>
+    <tr>
+      <th scope="col">Category</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for cat in categories %}
+    <tr>
+      <th scope="row"><a href="{% url 'category' cat.id %}">{{ cat.name }}</a></th>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<!-- <div class="row">
   <h1>Categories:</h1>
   {% for cat in categories %}
     <a href="{% url 'category' cat.id %}">{{ cat.name }}</a>
   {% endfor %}
-</div>
+</div> -->
 <div class="row">
   {% for product in products %}
   <div style="margin-bottom: 40px;" class="col-lg-4">
@@ -21,14 +36,14 @@
     <div class="box-element product">
       <h6><strong>{{ product.name }}</strong></h6>
       <hr />
-      <button
+      <!-- <button
         data-product="{{ product.id }}"
         data-action="add"
         class="btn btn-outline-secondary add-btn update-cart"
       >
         Add to Cart
-      </button>
-      <a class="btn btn-outline-success" href="{% url 'details' product.id %}">View Details</a>
+      </button> -->
+      <a class="btn btn-outline-secondary" href="{% url 'details' product.id %}">View Details</a>
       <h4 style="display: inline-block; float: right;">
         ${{ product.price|floatformat:2 }}
       </h4>

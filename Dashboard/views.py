@@ -48,3 +48,7 @@ def detail_view(request, id):
     }
     return render(request, 'Dashboard/detail.html', context)
 
+# About page
+def about_page(request):
+    context = {}
+    return render(request, 'Dashboard/about.html', context)
