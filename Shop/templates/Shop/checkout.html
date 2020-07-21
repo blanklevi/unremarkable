@@ -91,7 +91,8 @@
     <br />
     <div class="box-element hidden" id="payment-info">
       <small>PayPal Options</small>
-      <button class="btn-dark" id="make-payment">Make Payment</button>
+      <div id="paypal-button-container"></div>
+      <!-- <button class="btn-dark" id="make-payment">Make Payment</button> -->
     </div>
   </div>
 
@@ -118,10 +119,46 @@
   </div>
 </div>
 
+<!-- Script for PayPal API -->
+<script src="https://www.paypal.com/sdk/js?client-id=ASKrzN1vVQC0faO5DtMutHer0ZF0lFCRNgr9gFlGxLAGYpzptXNBdH6wr9HQy0bgnSXY6ujlXTU1tG6K&currency=USD&disable-funding=credit"></script>
+
+<!-- Script for PayPal Button/Transaction -->
+<script>
+  let total = "{{ order.get_cart_total }}";
+  // Render the PayPal button into #paypal-button-container
+  paypal.Buttons({
+
+    style:{
+      color:'white',
+      shape: 'rect',
+      size: 'responsive',
+    },
+
+      // Set up the transaction
+      createOrder: function(data, actions) {
+          return actions.order.create({
+              purchase_units: [{
+                  amount: {
+                      value: parseFloat(total).toFixed(2)
+                  }
+              }]
+          });
+      },
+
+      // Finalize the transaction
+      onApprove: function(data, actions) {
+          return actions.order.capture().then(function(details) {
+              submitFormData()
+          });
+      }
+
+
+  }).render('#paypal-button-container');
+</script>
+
 <!-- Script: Hiding Shipping Info if digital purchase -->
 <script type="text/javascript">
   let shipping = "{{ order.shipping }}";
-  let total = "{{ order.get_cart_total }}";
   user = '{{ request.user }}'
 
   function getToken(name) {
@@ -163,11 +200,12 @@
   });
 
   // Trigger "Make Payment" Button
-  document
-    .getElementById("make-payment")
-    .addEventListener("click", function (e) {
-      submitFormData();
-    });
+  // document
+  //   .getElementById("make-payment")
+  //   .addEventListener("click", function (e) {
+  //     submitFormData();
+  //   });
+
   function submitFormData() {
     console.log("Payment button has been clicked");
     var userFormData = {

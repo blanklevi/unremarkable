@@ -12,10 +12,12 @@ def index(request):
     
     # Shop info
     products = Product.objects.all()
+    categories = Category.objects.all()
 
     context = {
         'products': products,
         'cartItems': cartItems,
+        'categories': categories,
     }
     return render(request, "Shop/index.html", context)
 
@@ -91,3 +93,29 @@ def processOrder(request):
         ShippingAddress.objects.create(customer=customer, order=order, address=data['shipping']['address'], city=data['shipping']['city'], state=data['shipping']['state'], zipcode=data['shipping']['zipcode'])    
 
     return JsonResponse('Payment Completed', safe=False)
+
+
+# Item Details Page
+def details_view(request, id):
+    # Cart Data
+    data = cartData(request)
+    cartItems = data['cartItems']
+
+    product = Product.objects.get(id=id)
+    context = {
+        'product': product,
+        'cartItems': cartItems,
+    }
+    return render(request, 'Shop/details.html', context)
+
+# Category Details Page
+def category_view(request, id):
+    # Cart Data
+    data = cartData(request)
+    cartItems = data['cartItems']
+
+    category = Category.objects.get(id=id)
+    context = {
+        'category': category,
+    }
+    return render(request, 'Shop/category.html', context)

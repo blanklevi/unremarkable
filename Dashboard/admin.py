@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import Post, PostImage
 from Users.models import User
-from Shop.models import Customer, Product, Order, OrderItem, ShippingAddress
+from Shop.models import Category, Customer, Product, Order, OrderItem, ShippingAddress
 
 # Dashboard App
 # Image uploading things
@@ -43,6 +43,10 @@ class OrderItemAdmin(admin.ModelAdmin):
 
 @admin.register(ShippingAddress)
 class ShippingAddressAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
     pass
 
 # Change the site header

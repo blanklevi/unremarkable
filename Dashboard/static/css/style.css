@@ -25,6 +25,13 @@
   box-shadow: -1px -3px 5px -2px rgba(214, 214, 214, 1);
 }
 
+.shadowz {
+  border: black;
+  -webkit-box-shadow: -1px -3px 5px -2px rgba(214, 214, 214, 1);
+  -moz-box-shadow: -1px -3px 5px -2px rgba(214, 214, 214, 1);
+  box-shadow: -1px -3px 5px -2px rgba(214, 214, 214, 1);
+}
+
 .cart-row {
   display: flex;
   align-items: flex-stretch;

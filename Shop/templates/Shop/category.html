@@ -1,0 +1,12 @@
+{% extends 'Shop/base.html' %} {% block content %} {% load static %}
+<!-- NotRemarkable Logo -->
+<img
+  class="img-fluid"
+  src="{% static 'img/NotRemarkable.png' %}"
+  alt="NotRemarkable Logo"
+  style="margin-top: 25px; margin-bottom: 25px;"
+/>
+
+<!-- Body -->
+<h1>{{ category.name }}</h1>
+{% endblock %}
