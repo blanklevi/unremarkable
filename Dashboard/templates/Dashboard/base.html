@@ -32,6 +32,44 @@
           <li class="nav-item">
             <a class="nav-link" href="/about">About</a>
           </li>
+          <li>
+            <!-- Button trigger modal -->
+            <a class="nav-link" href="" data-toggle="modal" data-target="#exampleModalCenter">
+              Newsletter
+              </a>
+            
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Subscribe to Newsletter</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <p>
+                      Stay up-to-date with NotRemarkable. Be the first to see get updates on new blog posts and new merch listings!
+                    </p>
+                    <div class="form-holder">
+                      <form action="{% url 'subscribe' %}" method="POST">
+                      {% csrf_token %}
+                      <div class="form-group">
+                        {{ form }}
+                        <button type="submit" class="submit btn btn-dark">Subscribe</button>
+                      </div>
+                      </form>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
         </ul>
       </div>
 

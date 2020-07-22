@@ -102,9 +102,11 @@ def details_view(request, id):
     cartItems = data['cartItems']
 
     product = Product.objects.get(id=id)
+    categories = Category.objects.all()
     context = {
         'product': product,
         'cartItems': cartItems,
+        'categories': categories,
     }
     return render(request, 'Shop/details.html', context)
 
@@ -116,9 +118,11 @@ def category_view(request, id):
 
     category = Category.objects.get(id=id)
     products = Product.objects.filter(category=category)
+    categories = Category.objects.all()
     context = {
         'category': category,
         'products': products,
+        'categories': categories,
         'cartItems': cartItems,
     }
     return render(request, 'Shop/category.html', context)

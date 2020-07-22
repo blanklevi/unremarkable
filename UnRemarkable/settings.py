@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'Marketing',
     'Shop',
     'Users',
     'Dashboard',
@@ -129,3 +130,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_REDIRECT_URL = 'blog'
+
+# Mail Chimp
+MAILCHIMP_API_KEY='a3baa67992925989597e23e28bf81215-us17'
+MAILCHIMP_DATA_CENTER='us17'
+MAILCHIMP_EMAIL_LIST_ID='b2b130d338'

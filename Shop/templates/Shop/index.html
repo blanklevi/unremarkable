@@ -8,27 +8,6 @@
 />
 
 <!-- Body -->
-<table style="background-color: black; margin-bottom: 30px;" class="table table-responsive-sm table-dark">
-  <thead>
-    <tr>
-      <th scope="col">Category</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for cat in categories %}
-    <tr>
-      <th scope="row"><a href="{% url 'category' cat.id %}">{{ cat.name }}</a></th>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
-
-<!-- <div class="row">
-  <h1>Categories:</h1>
-  {% for cat in categories %}
-    <a href="{% url 'category' cat.id %}">{{ cat.name }}</a>
-  {% endfor %}
-</div> -->
 <div class="row">
   {% for product in products %}
   <div style="margin-bottom: 40px;" class="col-lg-4">

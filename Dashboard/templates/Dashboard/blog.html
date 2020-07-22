@@ -7,6 +7,61 @@
   style="margin-top: 25px; margin-bottom: 25px;"
 />
 
+<!-- Subscribe to Newsletter -->
+  <!-- <div class="row d-flex justify-content-center">
+    <div class="col-md-6">
+      <h2>Subscribe to Newsletter</h2>
+      <p class="text-big">
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+      </p>
+    </div>
+    <div class="col-md-8">
+      <div class="form-holder">
+        <form action="." method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+          <input type="email" name="email" id="email" placeholder="Type your email address here!">
+          <button type="submit" class="submit btn btn-dark">Subscribe</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div> -->
+  <!-- Button trigger modal -->
+  <!-- <a href="" data-toggle="modal" data-target="#exampleModalCenter">
+  Subscribe to our Newsletter!
+  </a>
+
+Modal
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<!-- Messages -->
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
 <!-- Cards -->
 <div class="row">
   {% for post in posts %}
