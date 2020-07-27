@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import Post, PostImage
 from Users.models import User
-from Shop.models import Category, Customer, Product, Order, OrderItem, ShippingAddress
+from Shop.models import Category, Customer, Product, Order, OrderItem, ShippingAddress, ProductSize
 from Marketing.models import Signup
 
 # Dashboard App
@@ -53,6 +53,10 @@ class CategoryAdmin(admin.ModelAdmin):
 # Marketing App
 @admin.register(Signup)
 class SignupAdmin(admin.ModelAdmin):
+    pass
+
+@admin.register(ProductSize)
+class ProductSizeAdmin(admin.ModelAdmin):
     pass
 
 # Change the site header

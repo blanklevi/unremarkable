@@ -32,6 +32,13 @@ class Product(models.Model):
             url = ''
         return url
 
+class ProductSize(models.Model):
+    product = models.ForeignKey(Product, related_name="productsize", on_delete=models.SET_NULL, null=True) 
+    size = models.CharField(max_length=20)
+
+    def __str__(self):
+        return f"{self.size} for {self.product}"
+
 class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True, blank=True)
     date_ordered = models.DateTimeField(auto_now_add=True)
@@ -73,6 +80,9 @@ class OrderItem(models.Model):
     def get_total(self):
         total = self.product.price * self.quantity
         return total
+
+    def __str__(self):
+        return f"{self.quantity} of {self.product}"
 
 class ShippingAddress(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)

@@ -103,6 +103,7 @@ def details_view(request, id):
 
     product = Product.objects.get(id=id)
     categories = Category.objects.all()
+    print(product.productsize)
     context = {
         'product': product,
         'cartItems': cartItems,
